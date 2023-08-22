@@ -170,8 +170,19 @@ if __name__ == '__main__':
                 atexit.register(system_end())                            
         else: #안적었을때
             QMessageBox.warning(self, '경고', '이메일을 입력하세요.')
+    def check_admin(self, user_id):
+        conn = getConnection()
+        cur = conn.cursor()
+        sql = "SELECT user_type FROM user WHERE id = %s"
+        cur.execute(sql, (user_id,))
+        user_type = cur.fetchone()[0]
+        if user_type == '관리자':
+            QMessageBox.information(self, '알림', f'{user_id} 관리자님 안녕하세요.')
+
     def manageTimer(self):
+        self.check_admin(self.id)  # 관리자 여부 확인 및 메시지 출력
         webbrowser.open('admin.html')
+
 
 
 if __name__ == '__main__':
