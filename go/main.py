@@ -115,7 +115,8 @@ if __name__ == '__main__':
                 #    os.system('shutdown -r -t 0') # 아이디 맞으면 종료됨.
                     self.timer_running = True  # 플래그를 True로 설정하여 타이머가 실행 중임을 나타냄
                     self.id = row[0] #이건 혹시나 쓰일까봐 넣어둔것 왜죠...?
-                     
+                    # self.check_admin(self.id) : 되는지 확인,,
+                      
                     #@@@@@@@여기부터 
                     sql = "select subject from log where num = (select max(num) from log where id = %s and (subject = '시작' or subject = '종료'))"#로그에서 시작,종료만 해당하는 num 젤큰거 가져와서;
                     cur.execute(sql, (self.id,)) #쿼리실행
